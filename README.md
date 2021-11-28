@@ -27,10 +27,11 @@ If you need double quotes, move the command into a script file and use it in the
 
 ## usage
 ### dmenu
-call `tcim-dmenu` to list the available commands in a dmenu.
+Call `tcim-dmenu` to list the available commands in a dmenu.
+Currently `xterm` is used to display the result of the command and it is expected to be installed.
 
 ### xdg desktop menu
-call `tcim-update-xdg-menu` to update your desktop menu, used by many desktop environments.
+Call `tcim-update-xdg-menu` to update your desktop menu, used by many desktop environments.
 Once called, everything (e.g. editing the commands-file) is available from the menu.
 
 ## uninstall
