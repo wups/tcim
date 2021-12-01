@@ -19,6 +19,9 @@ Since it is a `.tsv` file, you could even use a spreadsheet program like libreof
 
     list filesystems	report file system space usage	df -h
 
+If you don't want to keep the terminal open after the command has finished, prepend the command with `[NOKEEP]`.
+If you don't want to run the command in a terminal, prepend the command with `[NOTERM]`.
+
 The command can't contain double quotes `"`.
 If you need double quotes, move the command into a script file and use it in the command field.
 
@@ -41,7 +44,5 @@ You can use this command to get rid of them:
     xdg-desktop-menu uninstall command-menu.directory ~/.local/share/applications/command-*
 
 ## todo
-- [NOTERM] don't start in terminal
-- [NOKEEP] don't keep terminal open
 - new field for optional working directory
 - support more menu systems (e.g. rofi, openbox)
