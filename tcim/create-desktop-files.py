@@ -3,15 +3,25 @@ from pathlib import Path
 
 from tcim import cmdlib
 
-template = """\
+base_template = """\
 [Desktop Entry]
 Name={name}
 Comment={comment}
-Exec=sh -c "{command}; read"
 Type=Application
-Icon=utilities-terminal
+Icon=utilities-terminal"""
+
+term_template = base_template + """
+Exec=sh -c "{command}; read"
 Terminal=true"""
-    
+
+nokeep_template = base_template + """
+Exec=sh -c "{command}"
+Terminal=true"""
+
+noterm_template = base_template + """
+Exec={command}
+Terminal=false"""
+
 desktopfiles_dir = Path.home() / ".cache" / "tcim"
 directory_file = cmdlib.tcim_conf_dir / "command-menu.directory"
 
@@ -33,8 +43,18 @@ if not directory_file.exists():
 
 for cmd in cmdlib.cmd_dict.values():
     # populate template
-    desktop_str = template.format(name=cmd.name, comment=cmd.comment, command=cmd.command)
-
+    if not cmd.terminal:
+        desktop_str = noterm_template.format(
+            name=cmd.name, comment=cmd.comment, command=cmd.command
+        )
+    elif not cmd.keep:
+        desktop_str = nokeep_template.format(
+            name=cmd.name, comment=cmd.comment, command=cmd.command
+        )
+    else:
+        desktop_str = term_template.format(
+            name=cmd.name, comment=cmd.comment, command=cmd.command
+        )
     # save .desktop file
     filename = "command-" + cmd.name.replace(" ","-") + ".desktop"
     (desktopfiles_dir / filename).write_text(desktop_str)

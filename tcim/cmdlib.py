@@ -8,7 +8,18 @@ class Command:
     def __init__(self, name, comment, command):
         self.name = name
         self.comment = comment
-        self.command = command
+        self.terminal = True
+        self.keep = True
+
+        if command.startswith("[NOTERM]"):
+            self.command = command[8:]
+            self.terminal = False
+            self.keep = False
+        elif command.startswith("[NOKEEP]"):
+            self.command = command[8:]
+            self.keep = False
+        else:
+            self.command = command
 
     def __str__(self):
         string = self.name
@@ -17,8 +28,13 @@ class Command:
         return string
 
     def exec(self):
-        # or sh -c instead of eval
-        Popen([Command.TERMINAL, '-e', 'eval "' + self.command + '; read"'])
+        if not self.terminal:
+            Popen([self.command], shell=True)
+        elif not self.keep:
+            Popen([Command.TERMINAL, '-e', 'eval "' + self.command + '"'])
+        else:
+            # or sh -c instead of eval
+            Popen([Command.TERMINAL, '-e', 'eval "' + self.command + '; read"'])
 
 
 cmd_dict = {}

@@ -1,4 +1,4 @@
-Edit commands	with nano	nano ~/.config/tcim/commands.tsv
+Edit commands	with nano	[NOKEEP]nano ~/.config/tcim/commands.tsv
 Update menu	only for the xdg desktop menu	tcim-update-xdg-menu
 An example command	an example comment	ls -l
 Weather forecast	from wttr.in	curl wttr.in
