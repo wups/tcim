@@ -1,6 +1,8 @@
 # tcim - terminal commands in menus
 An easy way to call hard to remember or complex terminal commands or scripts from a menu.
 
+This is the package version. There is also a [portable version](https://github.com/wups/tcim-portable).
+
 ## supported menu systems
 - dmenu
 - xdg desktop menu
